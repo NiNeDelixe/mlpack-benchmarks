@@ -25,6 +25,6 @@ mkdir nearpy/
 tar -xzpf nearpy.tar.gz --strip-components=1 -C nearpy/
 
 cd nearpy/
-python3 setup.py build
+python3 -m pip install --upgrade pip setuptools wheel
 PYVER=`python3 -c 'import sys; print("python" + sys.version[0:3])'`;
-PYTHONPATH=../lib/$PYVER/site-packages/ python3 setup.py install --prefix=../ -O2
+PYTHONPATH=../lib/$PYVER/site-packages/ python3 -m pip install . --prefix=../ --no-deps

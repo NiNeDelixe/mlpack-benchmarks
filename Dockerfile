@@ -59,12 +59,12 @@ RUN chmod +x ./libraries/*.sh
 RUN find . -type f -exec sed -i 's/\r$//' {} \;
 RUN apk add --no-cache wget curl
 
-#RUN make setup
+RUN make setup
 
 RUN rm -rf ./libraries/*.tar.gz \
     ./libraries/*.zip \
     ./libraries/*.jar
 
-RUN make datasets
+#RUN make datasets
 
 ENTRYPOINT ["/usr/bin/make", "run"]

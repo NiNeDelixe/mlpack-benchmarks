@@ -46,6 +46,7 @@ cmake -DPYTHON_INCLUDE_DIR=/usr/include/python3.5 \
     -DCMAKE_BUILD_TYPE=Release \
     -DENABLE_TESTING=OFF \
     -DCMAKE_INSTALL_PREFIX=../../ \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     ../
 make
 make install

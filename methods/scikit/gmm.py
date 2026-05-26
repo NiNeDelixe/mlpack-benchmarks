@@ -15,7 +15,7 @@ if cmd_subfolder not in sys.path:
   sys.path.insert(0, cmd_subfolder)
 
 from util import *
-from sklearn import mixture
+from sklearn.mixture import GaussianMixture
 
 '''
 This class implements the Gaussian Mixture Model benchmark.
@@ -33,7 +33,7 @@ class SCIKIT_GMM(object):
     if "seed" in method_param:
       self.build_opts["random_state"] = int(method_param["seed"])
     if "num_init" in method_param:
-      self.build_opts["n_init"] = int(method_param["n_init"])
+      self.build_opts["n_init"] = int(method_param["num_init"])
     if "tolerance" in method_param:
       self.build_opts["tol"] = float(method_param["tolerance"])
     if "max_iterations" in method_param:
@@ -43,7 +43,7 @@ class SCIKIT_GMM(object):
     return self.info
 
   def metric(self):
-    model = mixture.GaussianMixture(**self.build_opts)
+    model = GaussianMixture(**self.build_opts)
 
     totalTimer = Timer()
     with totalTimer:

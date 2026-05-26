@@ -34,5 +34,6 @@ cmake -DCMAKE_CXX_FLAGS=-I/usr/include/hdf5/serial/ \
     -DBUILD_PYTHON_BINDINGS=OFF \
     -DBUILD_MATLAB_BINDINGS=OFF \
     -DBUILD_CUDA_LIBRARY=OFF \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     ../
 make -j$cores install

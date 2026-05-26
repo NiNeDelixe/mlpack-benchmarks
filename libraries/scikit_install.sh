@@ -19,5 +19,5 @@ mkdir scikit/
 tar -xzpf scikit.tar.gz --strip-components=1 -C scikit/
 
 cd scikit/
-python3 setup.py build
-python3 setup.py install --prefix=../ -O2
+python3 -m pip install --upgrade pip setuptools wheel
+python3 -m pip install . --prefix=../ --no-deps

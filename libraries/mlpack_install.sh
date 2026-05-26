@@ -29,14 +29,14 @@ tar -xzpf mlpack.tar.gz --strip-components=1 -C mlpack/
 cd mlpack/
 mkdir build/
 cd build/
-cmake -DCMAKE_INSTALL_PREFIX=../../ -DBUILD_TESTS=OFF ../
+cmake -DCMAKE_INSTALL_PREFIX=../../ -DBUILD_TESTS=OFF -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DDOWNLOAD_DEPENDENCIES=ON ../
 make install
 
 # Also install debug version.
 cd ..
 mkdir build-debug/
 cd build-debug/
-cmake -DDEBUG=ON -DCMAKE_INSTALL_PREFIX=../../debug/ -DBUILD_TEST=OFF ../
+cmake -DDEBUG=ON -DCMAKE_INSTALL_PREFIX=../../debug/ -DBUILD_TEST=OFF -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DDOWNLOAD_DEPENDENCIES=ON ../
 make -j$cores install
 
 # Work around bug in 2.2.0 and 2.2.1.

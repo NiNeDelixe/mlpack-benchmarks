@@ -22,6 +22,6 @@ tar -xzpf dlibml.tar.gz --strip-components=1 -C dlibml/
 cd dlibml/
 mkdir build/
 cd build/
-cmake -DCMAKE_INSTALL_PREFIX=../../ ..
+cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_INSTALL_PREFIX=../../ ..
 cmake --build . --config Release
 make install

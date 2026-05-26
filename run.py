@@ -32,10 +32,10 @@ def run(config, library, methods, loglevel):
   logging.basicConfig(level=logginglevel, format='[%(levelname)s] %(message)s')
 
   stream = open("base.yaml", "r")
-  base_param = list(yaml.load_all(stream))[0]
+  base_param = list(yaml.load_all(stream, Loader=yaml.Loader))[0]
 
   stream = open("driver.yaml", "r")
-  driver_param = list(yaml.load_all(stream))[0]
+  driver_param = list(yaml.load_all(stream, Loader=yaml.Loader))[0]
 
   # Configure output driver.
   if "output_driver" in driver_param:
@@ -43,7 +43,7 @@ def run(config, library, methods, loglevel):
     driver = getattr(module, "Driver")(driver_param)
 
   stream = open(config, "r")
-  method_config = yaml.load_all(stream)
+  method_config = yaml.load_all(stream, Loader=yaml.Loader)
   for method in method_config:
     name, values = method.popitem()
 
@@ -71,7 +71,8 @@ def run(config, library, methods, loglevel):
           method_call = getattr(module, name)
 
           try:
-            @timeout_decorator.timeout(base_param["timeout"], use_signals=True)
+            use_signals = (os.name != "nt")
+            @timeout_decorator.timeout(base_param["timeout"], use_signals=use_signals)
             def run_timeout_wrapper():
               instance = method_call(method_param, base_param)
               logging.info('Run: %s' % (str(instance)))

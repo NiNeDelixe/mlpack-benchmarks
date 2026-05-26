@@ -19,5 +19,5 @@ mkdir mlpy/
 tar -xzpf mlpy.tar.gz --strip-components=1 -C mlpy/
 
 cd mlpy/
-python3 setup.py build
-python3 setup.py install --prefix=../ -O2
+python3 -m pip install --upgrade pip setuptools wheel numpy
+python3 -m pip install . --prefix=../ --no-deps

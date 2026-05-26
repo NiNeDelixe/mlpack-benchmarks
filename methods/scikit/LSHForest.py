@@ -1,7 +1,7 @@
 '''
   @file LSHForest.py
 
-  Approximate Nearest Neighbors using LSHForest with scikit.
+  Approximate Nearest Neighbors with scikit.
 '''
 
 import os, sys, inspect
@@ -14,7 +14,7 @@ if cmd_subfolder not in sys.path:
   sys.path.insert(0, cmd_subfolder)
 
 from util import *
-from sklearn.neighbors import LSHForest
+from sklearn.neighbors import NearestNeighbors
 
 '''
 This class implements the Approximate Nearest Neighbors benchmark.
@@ -28,7 +28,8 @@ class SCIKIT_ANN(object):
 
     self.build_opts = {}
     if "num_trees" in method_param:
-      self.build_opts["n_estimators"] = int(method_param["num_trees"])
+      # Not used by NearestNeighbors, retained for config compatibility.
+      self.build_opts["leaf_size"] = max(1, int(method_param["num_trees"]))
 
     if "k" in method_param:
       self.n_neighbors = int(method_param["k"])
@@ -38,13 +39,13 @@ class SCIKIT_ANN(object):
       self.build_opts["min_hash_match"] = int(method_param["min_hash_match"])
     # Minimum number of candidates evaluated per estimator.
     if "num_candidates" in method_param:
-      self.build_options["n_candidates"] = int(method_param["n_candidates"])
+      self.build_opts["n_candidates"] = int(method_param["num_candidates"])
     # Radius from data point to its neighbors.
     if "radius" in method_param:
-      self.build_options["radius"] = float(method_param["radius"])
+      self.build_opts["radius"] = float(method_param["radius"])
     # A value ranges from 0 to 1.
     if "radius_cutoff_ratio" in method_param:
-      self.build_options["radius_cutoff_ratio"] = float(
+      self.build_opts["radius_cutoff_ratio"] = float(
         method_param["radius_cutoff_ratio"])
 
   def __str__(self):
@@ -53,7 +54,9 @@ class SCIKIT_ANN(object):
   def metric(self):
     totalTimer = Timer()
     with totalTimer:
-      model = LSHForest(**self.build_opts)
+      # LSHForest was removed from sklearn; NearestNeighbors keeps this
+      # benchmark runnable on modern sklearn versions.
+      model = NearestNeighbors()
       model.fit(self.data[0])
 
       distances,indices = model.kneighbors(self.data[1],

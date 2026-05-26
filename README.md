@@ -32,6 +32,17 @@ Quick links to this file:
 
 Benchmarks are run with the `make` command.
 
+### Windows support
+
+For Windows, use the cross-platform runner `benchmark_windows.py` (PowerShell/CMD). It mirrors core tasks without requiring GNU Make:
+
+* `python benchmark_windows.py run --config test.yaml`
+* `python benchmark_windows.py run --config config.yaml --lib mlpack --methods KMEANS`
+* `python benchmark_windows.py setup --build-cores 4`
+* `python benchmark_windows.py datasets`
+
+> Note: `setup`/`datasets` still invoke shell scripts (`bash`) for package and dataset download steps. Running through WSL or Git Bash is recommended for those tasks on Windows.
+
 * `make run`        -- Perform the benchmark.
 * `make memory`     -- Get memory profiling information.
 * `make test`       -- Test the configuration file. Check for correct syntax and then try to open files referred in the configuration file.

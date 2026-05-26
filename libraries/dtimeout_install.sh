@@ -19,7 +19,7 @@ mkdir dtimeout/
 tar -xzpf dtimeout.tar.gz --strip-components=1 -C dtimeout/
 
 cd dtimeout/
-python3 setup.py build
+python3 -m pip install --upgrade pip setuptools wheel
 PYVER=`python3 -c 'import sys; print("python" + sys.version[0:3])'`;
 mkdir -p ../lib/$PYVER/site-packages/
-PYTHONPATH=../lib/$PYVER/site-packages/ python3 setup.py install --prefix=../ -O2
+PYTHONPATH=../lib/$PYVER/site-packages/ python3 -m pip install . --prefix=../ --no-deps
