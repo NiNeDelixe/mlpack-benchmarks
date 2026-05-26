@@ -1,0 +1,23 @@
+services:
+  benchmarks:
+    environment:
+        - CMAKE_POLICY_VERSION_MINIMUM=3.5
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: benchmarks
+    working_dir: /usr/src/benchmarks
+
+    volumes:
+      - ./:/usr/src/benchmarks
+      - benchmarks_libraries:/usr/src/benchmarks/libraries
+      - benchmarks_datasets:/usr/src/benchmarks/datasets
+
+    stdin_open: true
+    tty: true
+
+    restart: unless-stopped
+
+volumes:
+  benchmarks_libraries:
+  benchmarks_datasets:
